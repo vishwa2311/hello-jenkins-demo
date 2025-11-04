@@ -29,14 +29,16 @@ pipeline {
         }
 
         stage('Run App in Background') {
-            steps {
-                echo 'Starting Node.js app in background...'
-                sh '''
-                    nohup node app.js > app.log 2>&1 &
-                    echo "✅ Node.js app started on port 3000"
-                '''
-            }
-        }
+  steps {
+    echo 'Starting Node.js app in background...'
+    sh '''
+      nohup node server.js > app.log 2>&1 &
+      sleep 2
+      ps aux | grep node | grep -v grep
+      tail -n 10 app.log || true
+    '''
+  }
+}
     }
 
     post {

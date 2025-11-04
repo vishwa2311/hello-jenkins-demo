@@ -45,3 +45,7 @@ pipeline {
             echo '🌐 Access your app at: http://35.172.199.64:3000/'
         }
         failure {
+            echo '❌ Build failed. Check console logs for errors.'
+        }
+    }
+}
